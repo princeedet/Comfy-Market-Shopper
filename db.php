@@ -1,11 +1,14 @@
 <?php
-$host = "localhost";
-$user = "root"; // change if needed
-$pass = "";     // change if needed
-$db   = "shopdb";
+$servername = "localhost";
+$username = "root";      // your DB username
+$password = "";          // your DB password
+$dbname = "shopdb";
 
-$conn = new mysqli($host, $user, $pass, $db);
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
 if ($conn->connect_error) {
-    die("DB Connection failed: " . $conn->connect_error);
+    die("Connection failed: " . $conn->connect_error);
 }
 ?>

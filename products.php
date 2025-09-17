@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,11 +54,12 @@
           <button onclick="toggleProductDropdown()" class="bg-green-800 text-white px-4 py-2 rounded shadow flex items-center gap-2">
             <i class="fas fa-plus"></i> Create New Product
           </button>
-          <div id="productDropdown" class="absolute right-0 mt-2 w-48 bg-white border rounded shadow hidden">
+          <div id="productDropdown" class="absolute left-0 mt-2 w-48 bg-white border rounded shadow hidden z-50">
             <a href="#" onclick="openProductModal()" class="block px-4 py-2 hover:bg-gray-100">+ New Product</a>
             <a href="#" class="block px-4 py-2 hover:bg-gray-100">+ New Meat-Sharing Order</a>
           </div>
         </div>
+
 
         <!-- Notifications -->
         <i class="fas fa-bell"></i>
@@ -64,14 +67,15 @@
         <!-- Profile Dropdown -->
         <div class="relative">
           <button onclick="toggleProfileDropdown()" class="flex items-center gap-2">
-            <img src="https://via.placeholder.com/30" class="rounded-full" alt="Admin">
+            <i class="fas fa-person rounded-full bg-gray-300 p-2"></i>
+            <span class="hidden md:inline-block">Admin</span>
           </button>
           <div id="profileDropdown" class="absolute right-0 mt-2 w-48 bg-white border rounded shadow hidden p-4">
             <span class="font-medium block">Admin</span>
             <span class="text-xs text-gray-500">Super Admin</span>
             <div class="border-t my-2"></div>
-            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Profile</a>
-            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Settings</a>
+            <a href="settings.php" class="block px-4 py-2 hover:bg-gray-100">Profile</a>
+            <a href="settings.php" class="block px-4 py-2 hover:bg-gray-100">Settings</a>
             <a href="logout.php" class="block px-4 py-2 hover:bg-gray-100">Logout</a>
           </div>
         </div>
@@ -105,6 +109,7 @@
       <div class="bg-white p-6 rounded-xl shadow-lg w-[28rem] relative">
         <button onclick="closeProductModal()" class="absolute top-2 right-2 text-gray-500 text-xl font-bold">&times;</button>
         <h2 class="text-lg font-bold mb-4 text-center">➕ Add New Product</h2>
+        <p class="text-sm text-gray-500 mb-3">Add clear photos of your product. Good photos get more views!</p>
 
         <form action="add_product.php" method="POST" enctype="multipart/form-data" class="space-y-4">
           <div>
@@ -184,10 +189,10 @@
               <td class="border p-2"><?= $row['created_at'] ?></td>
               <td class="border p-2 text-center">
                 <form action="delete_product.php" method="POST"
-                      onsubmit="return confirm('Are you sure you want to delete this product?');">
+                  onsubmit="return confirm('Are you sure you want to delete this product?');">
                   <input type="hidden" name="id" value="<?= $row['id'] ?>">
                   <button type="submit"
-                          class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700">
+                    class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700">
                     <i class="fas fa-trash"></i> Delete
                   </button>
                 </form>
@@ -218,6 +223,7 @@
     function toggleProductDropdown() {
       document.getElementById('productDropdown').classList.toggle('hidden');
     }
+
     function toggleProfileDropdown() {
       document.getElementById('profileDropdown').classList.toggle('hidden');
     }
@@ -226,6 +232,7 @@
     function openProductModal() {
       document.getElementById('productModal').classList.remove('hidden');
     }
+
     function closeProductModal() {
       document.getElementById('productModal').classList.add('hidden');
     }
@@ -237,16 +244,20 @@
       overflow: hidden;
       background-color: #28433D;
     }
+
     .sidebar-collapsed {
       width: 4rem;
     }
+
     .sidebar-expanded {
       width: 14rem;
     }
+
     .sidebar-collapsed .sidebar-text {
       display: none;
     }
   </style>
 
 </body>
+
 </html>

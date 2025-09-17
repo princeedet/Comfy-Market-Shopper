@@ -48,15 +48,7 @@
       <div class="flex items-center gap-4">
 
         <!-- Create New Product Dropdown -->
-        <div class="relative">
-          <button onclick="toggleProductDropdown()" class="bg-green-800 text-white px-4 py-2 rounded shadow flex items-center gap-2">
-            <i class="fas fa-plus"></i> Create New Product
-          </button>
-          <div id="productDropdown" class="absolute right-0 mt-2 w-48 bg-white border rounded shadow hidden">
-            <a href="#" onclick="openProductModal()" class="block px-4 py-2 hover:bg-gray-100">+ New Product</a>
-            <a href="#" class="block px-4 py-2 hover:bg-gray-100">+ New Meat-Sharing Order</a>
-          </div>
-        </div>
+        
 
         <!-- Notifications -->
         <i class="fas fa-bell"></i>
