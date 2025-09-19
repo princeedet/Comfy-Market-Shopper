@@ -12,6 +12,8 @@ DROP TABLE IF EXISTS activity;
 DROP TABLE IF EXISTS orders;
 DROP TABLE IF EXISTS products;
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS employees;
+DROP TABLE IF EXISTS system_settings;
 
 -- =========================
 -- Activity Table
@@ -58,12 +60,54 @@ CREATE TABLE users (
 );
 
 -- =========================
+-- Employees Table
+-- =========================
+CREATE TABLE employees (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  emp_id VARCHAR(10) NOT NULL UNIQUE,
+  name VARCHAR(100) NOT NULL,
+  email VARCHAR(100) NOT NULL,
+  phone VARCHAR(20),
+  status ENUM('Active','Inactive') DEFAULT 'Active',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- =========================
+-- System Settings Table
+-- =========================
+CREATE TABLE system_settings (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  system_language VARCHAR(50) DEFAULT 'English',
+  admin_theme VARCHAR(20) DEFAULT 'Light',
+  timezone VARCHAR(50) DEFAULT 'GMT',
+  currency VARCHAR(20) DEFAULT 'USD ($)',
+  system_font VARCHAR(50) DEFAULT 'Hanken Grotesk',
+  allow_signup TINYINT(1) DEFAULT 1,
+  user_theme VARCHAR(20) DEFAULT 'Light',
+  datetime_format VARCHAR(20) DEFAULT 'DD/MM/YYYY',
+  notifications TINYINT(1) DEFAULT 1,
+  dashboard_layout VARCHAR(20) DEFAULT 'Spacious',
+  update_frequency VARCHAR(20) DEFAULT 'Monthly',
+  security_frequency VARCHAR(20) DEFAULT 'Weekly',
+  log_format VARCHAR(50) DEFAULT 'CSV,PDF,XLS'
+);
+
+-- =========================
+-- Default System Settings Row
+-- =========================
+INSERT INTO system_settings (
+  system_language, admin_theme, timezone, currency, system_font, allow_signup, user_theme, datetime_format, notifications, dashboard_layout, update_frequency, security_frequency, log_format
+) VALUES (
+  'English','Light','GMT','USD ($)','Hanken Grotesk',1,'Light','DD/MM/YYYY',1,'Spacious','Monthly','Weekly','CSV,PDF,XLS'
+);
+
+-- =========================
 -- Orders Table
 -- =========================
 CREATE TABLE orders (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  product VARCHAR(255) NOT NULL,       -- store product name for simplicity
-  product_id INT NULL,                 -- link to products table
+  product VARCHAR(255) NOT NULL,
+  product_id INT NULL,
   customer VARCHAR(255) NOT NULL,
   quantity INT NOT NULL,
   deadline DATE,
@@ -106,16 +150,19 @@ INSERT INTO users (username, password, role, status, email, phone, location) VAL
 ('user1', '$2y$10$user1hashplaceholder', 'user', 'Active', 'user1@example.com', '08033334444', 'Ikeja');
 
 -- =========================
+-- Sample Employees
+-- =========================
+INSERT INTO employees (emp_id, name, email, phone, status) VALUES
+('EMP001', 'John Doe', 'john@example.com', '+2348012345678', 'Active'),
+('EMP002', 'Jane Smith', 'jane@example.com', '+2348098765432', 'Active');
+
+-- =========================
 -- Sample Orders
 -- =========================
 INSERT INTO orders (product, product_id, quantity, deadline, status, value, customer, address) VALUES
 ('Beef Pack', 1, 2, '2024-09-20', 'Completed', 24000.00, 'John Doe', '12 Broad Street, Lagos'),
 ('Chicken', 2, 5, '2024-09-22', 'Pending', 25000.00, 'Jane Smith', '45 Allen Avenue, Ikeja'),
-('Fish', 3, 3, '2024-09-25', 'Processing', 18000.00, 'Michael Lee', '78 Admiralty Way, Lekki'),
--- Meat-Sharing Orders
-('Beef Pack', 1, 3, '2024-09-26', 'Pending', 36000.00, 'Alice Johnson', '23 Victoria Island, Lagos'),
-('Chicken', 2, 2, '2024-09-27', 'Processing', 10000.00, 'Bob Smith', '56 Lekki Phase 1, Lagos'),
-('Beef Pack', 1, 1, '2024-09-28', 'Pending', 12000.00, 'Cynthia Brown', '78 Ikoyi, Lagos');
+('Fish', 3, 3, '2024-09-25', 'Processing', 18000.00, 'Michael Lee', '78 Admiralty Way, Lekki');
 
 -- =========================
 -- Sample Payments
@@ -123,13 +170,7 @@ INSERT INTO orders (product, product_id, quantity, deadline, status, value, cust
 INSERT INTO payments (order_id, customer, product, amount, method, txn_id, status) VALUES
 (1, 'John Doe', 'Beef Pack', 24000.00, 'Credit Card', 'TXN123456789', 'Successful'),
 (2, 'Jane Smith', 'Chicken', 25000.00, 'Bank Transfer', 'TXN987654321', 'Pending'),
-(3, 'Michael Lee', 'Fish', 18000.00, 'Credit Card', 'TXN192837465', 'Failed'),
-(1, 'John Doe', 'Beef Pack', 24000.00, 'Bank Transfer', 'TXN564738291', 'Successful'),
-(2, 'Jane Smith', 'Chicken', 25000.00, 'Credit Card', 'TXN837465920', 'Successful'),
--- Payments for Meat-Sharing Orders
-(4, 'Alice Johnson', 'Beef Pack', 36000.00, 'USSD', 'TXN555666777', 'Pending'),
-(5, 'Bob Smith', 'Chicken', 10000.00, 'Credit Card', 'TXN888999000', 'Processing'),
-(6, 'Cynthia Brown', 'Beef Pack', 12000.00, 'Wallet', 'TXN111222333', 'Pending');
+(3, 'Michael Lee', 'Fish', 18000.00, 'Credit Card', 'TXN192837465', 'Failed');
 
 -- =========================
 -- Sample Activity
@@ -139,6 +180,4 @@ INSERT INTO activity (type, message) VALUES
 ('product', 'New product <b>Chicken</b> added'),
 ('order', 'New order <b>Beef Pack</b> by <b>John Doe</b> added'),
 ('order', 'New order <b>Chicken</b> by <b>Jane Smith</b> added'),
-('order', 'New order <b>Beef Pack</b> by <b>Alice Johnson</b> added'),
-('payment', 'Payment <b>TXN123456789</b> recorded for <b>John Doe</b>'),
-('payment', 'Payment <b>TXN555666777</b> recorded for <b>Alice Johnson</b>');
+('payment', 'Payment <b>TXN123456789</b> recorded for <b>John Doe</b>');

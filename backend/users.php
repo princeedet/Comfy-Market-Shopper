@@ -40,12 +40,24 @@ $totalOrders  = $conn->query("SELECT COUNT(*) AS count FROM orders")->fetch_asso
       <img src="../img/Group 243 (1).png" alt="logo" class="w-8 h-8" style="width: fit-content; height: fit-content;">
     </div>
     <nav class="flex-1 w-full">
-      <a href="dashboard.php" class="flex items-center space-x-3 px-4 py-3"><i class="fas fa-home"></i><span class="sidebar-text">Dashboard</span></a>
-      <a href="order.php" class="flex items-center space-x-3 px-4 py-3"><i class="fas fa-shopping-bag"></i><span class="sidebar-text">Orders</span></a>
-      <a href="users.php" class="flex items-center space-x-3 px-4 py-3"><i class="fas fa-users"></i><span class="sidebar-text">Users</span></a>
-      <a href="products.php" class="flex items-center space-x-3 px-4 py-3"><i class="fas fa-box"></i><span class="sidebar-text">Products</span></a>
-      <a href="payment.php" class="flex items-center space-x-3 px-4 py-3"><i class="fas fa-credit-card"></i><span class="sidebar-text">Payments</span></a>
-      <a href="settings.php" class="flex items-center space-x-3 px-4 py-3"><i class="fas fa-cog"></i><span class="sidebar-text">Settings</span></a>
+      <a href="dashboard.php" class="flex items-center space-x-3 px-4 py-3 hover:bg-green-900 transition">
+        <i class="fas fa-home"></i><span class="sidebar-text">Dashboard</span>
+      </a>
+      <a href="order.php" class="flex items-center space-x-3 px-4 py-3 hover:bg-green-900 transition">
+        <i class="fas fa-shopping-bag"></i><span class="sidebar-text">Orders</span>
+      </a>
+      <a href="users.php" class="flex items-center space-x-3 px-4 py-3 hover:bg-green-900 transition">
+        <i class="fas fa-users"></i><span class="sidebar-text">Users</span>
+      </a>
+      <a href="products.php" class="flex items-center space-x-3 px-4 py-3 hover:bg-green-900 transition">
+        <i class="fas fa-box"></i><span class="sidebar-text">Products</span>
+      </a>
+      <a href="payment.php" class="flex items-center space-x-3 px-4 py-3 hover:bg-green-900 transition">
+        <i class="fas fa-credit-card"></i><span class="sidebar-text">Payments</span>
+      </a>
+      <a href="settings.php" class="flex items-center space-x-3 px-4 py-3 hover:bg-green-900 transition">
+        <i class="fas fa-cog"></i><span class="sidebar-text">Settings</span>
+      </a>
     </nav>
     <a href="../logout.php" class="flex items-center space-x-3 px-4 py-3 hover:bg-red-600">
       <i class="fas fa-sign-out-alt"></i>
@@ -56,28 +68,28 @@ $totalOrders  = $conn->query("SELECT COUNT(*) AS count FROM orders")->fetch_asso
   <!-- Main Content -->
   <div class="flex-1 flex flex-col">
     <header class="flex justify-between items-center p-4 bg-white shadow">
-  <h1 class="text-xl font-bold">Admin Portal</h1>
+      <h1 class="text-xl font-bold">Admin Portal</h1>
 
-  <!-- Right Section: Bell + Admin -->
-  <div class="flex items-center gap-6">
-    <!-- Notifications -->
-    <button class="relative">
-      <i class="fas fa-bell text-gray-700 text-lg"></i>
-      <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs px-1.5 rounded-full">3</span>
-    </button>
+      <!-- Right Section: Bell + Admin -->
+      <div class="flex items-center gap-6">
+        <!-- Notifications -->
+        <button class="relative">
+          <i class="fas fa-bell text-gray-700 text-lg"></i>
+          <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs px-1.5 rounded-full">3</span>
+        </button>
 
-    <!-- Admin -->
-    <div class="relative">
-      <button class="flex items-center gap-2">
-        <i class="fas fa-user-circle text-gray-600 text-2xl"></i>
-        <div class="flex flex-col items-start">
-          <span class="hidden md:inline-block">Admin</span>
-          <span class="text-xs text-gray-500">Administrator</span>
+        <!-- Admin -->
+        <div class="relative">
+          <button class="flex items-center gap-2">
+            <i class="fas fa-user-circle text-gray-600 text-2xl"></i>
+            <div class="flex flex-col items-start">
+              <span class="hidden md:inline-block">Admin</span>
+              <span class="text-xs text-gray-500">Administrator</span>
+            </div>
+          </button>
         </div>
-      </button>
-    </div>
-  </div>
-</header>
+      </div>
+    </header>
 
 
     <main class="p-6 space-y-6 flex-1 overflow-auto">
