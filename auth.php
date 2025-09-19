@@ -11,7 +11,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($email === $admin_email && $password === $admin_pass) {
         $_SESSION['user'] = $email;
-        header("Location: dashboard.php");
+        // Redirect to dashboard inside backend folder
+        header("Location: backend/dashboard.php");
         exit();
     } else {
         echo "<script>alert('Invalid credentials!'); window.location='index.php';</script>";

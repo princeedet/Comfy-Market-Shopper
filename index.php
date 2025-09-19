@@ -1,7 +1,8 @@
 <?php
 session_start();
+// If user is already logged in, redirect to dashboard inside backend folder
 if (isset($_SESSION['user'])) {
-    header("Location: dashboard.php");
+    header("Location: backend/dashboard.php");
     exit();
 }
 ?>
@@ -31,6 +32,7 @@ if (isset($_SESSION['user'])) {
                 <p>Please fill in login credentials</p>
             </div>
 
+            <!-- Login Form -->
             <form action="auth.php" method="POST">
                 <label>Email address</label>
                 <input type="email" name="email" required>
@@ -41,8 +43,6 @@ if (isset($_SESSION['user'])) {
                     <span id="togglePassword" onclick="togglePassword()">👁</span>
                 </div>
 
-
-
                 <a href="#" class="forgot">Forgot password?</a>
 
                 <button type="submit">Log In</button>
@@ -51,20 +51,19 @@ if (isset($_SESSION['user'])) {
     </div>
 
     <script>
+        // Password show/hide toggle
         function togglePassword() {
-            let pass = document.getElementById("password");
-            let toggle = document.getElementById("togglePassword");
-
+            const pass = document.getElementById("password");
+            const toggle = document.getElementById("togglePassword");
             if (pass.type === "password") {
                 pass.type = "text";
-                toggle.textContent = "🙈"; // change icon to hide
+                toggle.textContent = "🙈"; // hide icon
             } else {
                 pass.type = "password";
-                toggle.textContent = "👁"; // change icon to show
+                toggle.textContent = "👁"; // show icon
             }
         }
     </script>
 
 </body>
-
 </html>
